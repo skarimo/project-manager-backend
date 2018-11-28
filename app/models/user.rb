@@ -6,5 +6,16 @@ class User < ApplicationRecord
    has_secure_password
    validates :password, length: { minimum: 6, maximum: 15 }, on: :create
 
+   has_many :employees, :class_name => "User", :foreign_key => :manager_id
+   belongs_to :manager, :class_name => "User", optional: true
+
+   has_many :projects, class_name: 'Project', foreign_key: 'manager_id'
+
+   has_many :project_employee_cards, foreign_key: :employee_id
+
+   has_many :assigned_projects, :through => :project_employee_cards, :source => :project
+
+   # has_many :tasks, :through => :assigned_projects
+
 
 end
