@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   namespace :api do
     post 'auth/login', to: 'users#login'
     post 'auth/register', to: 'users#register'
+
+    #employee routes
+
+    #manager routes
+
   end
 
 

@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2018_11_28_062803) do
     t.string "password_digest"
     t.string "account_type"
     t.integer "manager_id"
+    t.text "photo_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

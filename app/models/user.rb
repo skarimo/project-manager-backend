@@ -15,7 +15,5 @@ class User < ApplicationRecord
 
    has_many :assigned_projects, :through => :project_employee_cards, :source => :project
 
-   # has_many :tasks, :through => :assigned_projects
-
 
 end

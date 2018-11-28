@@ -12,12 +12,15 @@ User.create(first_name: "3", last_name: "3", username: "3", password: "123456", 
 User.create(first_name: "4", last_name: "4", username: "4", password: "123456", email: "4@test", account_type: "EMPLOYEE", manager_id: 1)
 
 Project.create(name: "test project", manager_id: 1)
+Project.create(name: "test project 2", manager_id: 1)
 
 ProjectEmployeeCard.create(project_id: 1, employee_id: 2)
+ProjectEmployeeCard.create(project_id: 2, employee_id: 2)
 ProjectEmployeeCard.create(project_id: 1, employee_id: 3)
 ProjectEmployeeCard.create(project_id: 1, employee_id: 4)
 
-Task.create(name: "test task", description: "this is a test task", project_id: 1, employee_id: 1)
-Task.create(name: "test task 3", description: "this is a test task", project_id: 1, employee_id: 1)
-Task.create(name: "test task 1", description: "this is a test task", project_id: 1, employee_id: 2)
-Task.create(name: "test task 2", description: "this is a test task", project_id: 1, employee_id: 3)
+Task.create(name: "test task", description: "this is a test task", project_id: 1)
+Task.create(name: "test task 1", status: "IN PROGRESS", description: "this is a test task", project_id: 1, employee_id: 2)
+Task.create(name: "test task 2", status: "IN PROGRESS", description: "this is a test task", project_id: 1, employee_id: 3)
+Task.create(name: "test task 3", status: "IN PROGRESS", description: "this is a test task", project_id: 1, employee_id: 4)
+Task.create(name: "test task 4", status: "IN PROGRESS", description: "this is a test task", project_id: 1, employee_id: 4)

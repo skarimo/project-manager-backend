@@ -20,9 +20,10 @@ class Api::UsersController < ApplicationController
    end
   end
 
-  def test
-    @user = User.find(1)
-    render json: @user
+  def data
+    @user = User.find(params[:id])
+    @projects = @user.projects.map{|project| ProjectSerializer.new(project)}
+    render json: {projects: @projects, employees: @user.employees}
   end
 
 
@@ -32,11 +33,19 @@ class Api::UsersController < ApplicationController
     command = AuthenticateUser.call(username, password)
     if command.success?
       @user = User.find(JsonWebToken.decode(command.result)[:user_id])
-      render json: {
-        access_token: command.result,
-        message: 'Login Successful',
-        user: @user
-      }
+      if @user.account_type == "MANAGER"
+        render json: {
+          access_token: command.result,
+          message: 'Login Successful',
+          user: ManagerSerializer.new(@user)
+        }
+      elsif @user.account_type == "EMPLOYEE"
+        render json: {
+          access_token: command.result,
+          message: 'Login Successful',
+          user: EmployeeSerializer.new(@user)
+        }
+      end
     else
       render json: { error: command.errors }, status: :unauthorized
     end

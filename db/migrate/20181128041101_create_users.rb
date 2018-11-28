@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :password_digest
       t.string :account_type
       t.integer :manager_id
+      t.text :photo_url
       t.timestamps
     end
   end
