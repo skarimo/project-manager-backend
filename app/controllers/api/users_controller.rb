@@ -23,7 +23,11 @@ class Api::UsersController < ApplicationController
   def authorize_token
     @user_id = JsonWebToken.decode(request.headers["Authorization"])["user_id"]
     @user = User.find(@user_id)
-    render json: @user
+    if @user.account_type == "MANAGER"
+      render json: ManagerSerializer.new(@user)
+    elsif @user.account_type == "EMPLOYEE"
+      render json: EmployeeSerializer.new(@user)
+    end
   end
 
 
