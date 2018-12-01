@@ -20,10 +20,10 @@ class Api::UsersController < ApplicationController
    end
   end
 
-  def data
-    @user = User.find(params[:id])
-    @projects = @user.projects.map{|project| ProjectSerializer.new(project)}
-    render json: {projects: @projects, employees: @user.employees}
+  def authorize_token
+    @user_id = JsonWebToken.decode(request.headers["Authorization"])["user_id"]
+    @user = User.find(@user_id)
+    render json: @user
   end
 
 
